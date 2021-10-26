@@ -13,81 +13,122 @@
 
 <?php do_action( 'tailpress_site_before' ); ?>
 
-<div id="page" class="min-h-screen flex flex-col">
+<div id="page" class="flex flex-col">
 
-	<?php do_action( 'tailpress_header' ); ?>
+<?php do_action( 'tailpress_header' ); ?>
 
-	<header>
-
-		<div class="mx-auto container">
-			<div class="lg:flex lg:justify-between lg:items-center border-b py-6">
-				<div class="flex justify-between items-center">
-					<div>
-						<?php if ( has_custom_logo() ) { ?>
-                            <?php the_custom_logo(); ?>
-						<?php } else { ?>
-							<div class="text-lg uppercase">
-								<a href="<?php echo get_bloginfo( 'url' ); ?>" class="font-extrabold text-lg uppercase">
-									<?php echo get_bloginfo( 'name' ); ?>
-								</a>
-							</div>
-
-							<p class="text-sm font-light text-gray-600">
-								<?php echo get_bloginfo( 'description' ); ?>
-							</p>
-
-						<?php } ?>
-					</div>
-
-					<div class="lg:hidden">
-						<a href="#" aria-label="Toggle navigation" id="primary-menu-toggle">
-							<svg viewBox="0 0 20 20" class="inline-block w-6 h-6" version="1.1"
-								 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-								<g stroke="none" stroke-width="1" fill="currentColor" fill-rule="evenodd">
-									<g id="icon-shape">
-										<path d="M0,3 L20,3 L20,5 L0,5 L0,3 Z M0,9 L20,9 L20,11 L0,11 L0,9 Z M0,15 L20,15 L20,17 L0,17 L0,15 Z"
-											  id="Combined-Shape"></path>
-									</g>
-								</g>
-							</svg>
-						</a>
-					</div>
+<nav class="bg-white shadow">
+<div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
+	<div class="flex justify-between h-16">
+		<div class="flex px-2 lg:px-0">
+		<div class="flex-shrink-0 flex items-center">
+		<img class="block lg:hidden h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow">
+		<img class="hidden lg:block h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg" alt="Workflow">
+		</div>
+		<?php
+		wp_nav_menu(
+			array(
+				'container'       => 'div',	
+				'container_id'    => 'desktop-menu',
+				'container_class' => 'hidden lg:ml-6 lg:flex',
+				'menu_class'      => 'flex lg:space-x-8',
+				'theme_location'  => 'primary',
+				'li_class'        => 'border-transparent text-gray-900 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium',
+				'fallback_cb'     => false,
+				)
+			);
+		?>
+		</div>
+		<div class="flex-1 flex items-center justify-center px-2 lg:ml-6 lg:justify-end">
+			<div class="max-w-lg w-full lg:max-w-xs">
+			<label for="search" class="sr-only">Search</label>
+			<div class="relative">
+				<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+					<!-- Heroicon name: solid/search -->
+					<svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+					<path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+					</svg>
 				</div>
-
-				<?php
-				wp_nav_menu(
-					array(
-						'container_id'    => 'primary-menu',
-						'container_class' => 'hidden bg-gray-100 mt-4 p-4 lg:mt-0 lg:p-0 lg:bg-transparent lg:block',
-						'menu_class'      => 'lg:flex lg:-mx-4',
-						'theme_location'  => 'primary',
-						'li_class'        => 'lg:mx-4',
-						'fallback_cb'     => false,
-					)
-				);
-				?>
+			<input id="search" name="search" class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Search" type="search">
+			</div>
 			</div>
 		</div>
-	</header>
-
-	<div id="content" class="site-content flex-grow">
-
-		<!-- Start introduction -->
-		<?php if ( is_front_page() ) : ?>
-			<div class="container mx-auto my-12 border-b pb-12">
-				<h1 class="font-bold text-lg text-secondary uppercase">TailPress</h1>
-				<h2 class="text-3xl lg:text-7xl tracking-tight font-extrabold my-4">Rapidly build your WordPress theme
-					with <a href="https://tailwindcss.com" class="text-primary">Tailwind CSS</a>.</h2>
-				<p class="max-w-screen-lg text-gray-700 text-lg font-medium mb-10">TailPress is your go-to starting
-					point for developing WordPress themes with TailwindCSS and comes with basic block-editor support out
-					of the box.</p>
-				<a href="https://github.com/jeffreyvr/tailpress"
-				   class="w-full sm:w-auto flex-none bg-gray-900 text-white text-lg leading-6 font-semibold py-3 px-6 border border-transparent rounded-xl focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-gray-900 focus:outline-none transition-colors duration-200">View
-					on Github</a>
+		<div class="flex items-center lg:hidden">
+			<!-- Mobile menu button -->
+			<button type="button" class="mobile-menu-toggle inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-controls="mobile-menu" aria-expanded="false">
+			<span class="sr-only">Open main menu</span>
+			<!--
+			Icon when menu is closed.
+			Heroicon name: outline/menu
+			Menu open: "hidden", Menu closed: "block"
+			-->
+			<svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+			</svg>
+			<!--
+			Icon when menu is open.
+			Heroicon name: outline/x
+			Menu open: "block", Menu closed: "hidden"
+			-->
+			<svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+			</svg>
+			</button>
+		</div>
+		<div class="hidden lg:ml-4 lg:flex lg:items-center">
+			<div class="flex items-center lg:ml-8">
+			<a href="#" class="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block">Account</a>
+			<!-- Cart -->
+			<div class="ml-4 flow-root lg:ml-8">
+				<a href="#" class="group -m-2 p-2 flex items-center">
+				<!-- Heroicon name: outline/shopping-bag -->
+				<svg class="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+				</svg>
+				<span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
+				<span class="sr-only">items in cart, view bag</span>
+				</a>
 			</div>
-		<?php endif; ?>
-		<!-- End introduction -->
+			</div>
+		</div>
+	</div>
+</div>
 
-		<?php do_action( 'tailpress_content_start' ); ?>
+<!-- Mobile menu, show/hide based on menu state. -->
+<div class="lg:hidden" id="mobile-menu">
+	<?php
+	wp_nav_menu(
+	array(
+		'container'       => 'div',	
+		'container_id'    => 'mobile-menu',
+		'container_class' => 'pt-2 pb-3 space-y-1',
+		'menu_class'      => 'space-y-1',
+		'theme_location'  => 'primary',
+		'li_class'        => 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800 block pl-3 pr-4 py-2 border-l-4 text-base font-medium',
+		'fallback_cb'     => false,
+		)
+	);
+	?>
+	<div class="pt-4 pb-3 border-t border-gray-200">
+		<div class="mt-3 space-y-1">
+		<a href="#" class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100">My Account</a>
+		<a href="#" class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100">Contact Us</a>
+		<a href="#" class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100">Helpful Info</a>
+		</div>
+	</div>
+	</div>
+</div>
 
-		<main>
+<div id="content" class="site-content flex-grow">
+
+<!-- Start introduction -->
+<?php if ( is_front_page() ) : ?>
+<div class="container mx-auto my-12 border-b pb-12">
+	<h1 class="font-bold text-lg text-secondary uppercase">TailPress</h1>
+</div>
+<?php endif; ?>
+<!-- End introduction -->
+
+<?php do_action( 'tailpress_content_start' ); ?>
+
+<main>
