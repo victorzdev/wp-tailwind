@@ -95,7 +95,7 @@
 </div>
 
 <!-- Mobile menu, show/hide based on menu state. -->
-<div class="lg:hidden" id="mobile-menu">
+<div class="lg:hidden hidden" id="mobile-menu">
 	<?php
 	wp_nav_menu(
 	array(
