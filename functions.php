@@ -107,3 +107,19 @@ function tailpress_nav_menu_add_submenu_class( $classes, $args, $depth ) {
 }
 
 add_filter( 'nav_menu_submenu_css_class', 'tailpress_nav_menu_add_submenu_class', 10, 3 );
+
+
+/**
+ * Remove Blocks editor
+ */
+add_filter('use_block_editor_for_post', '__return_false', 10);
+
+
+/**
+ * Remove WooCommerce Blocks
+ */
+function deregister_woocommerce_block_styles() {
+	wp_deregister_style( 'wc-blocks-style' );
+	wp_dequeue_style( 'wc-blocks-style' );
+}
+add_action( 'enqueue_block_assets', 'deregister_woocommerce_block_styles' );
