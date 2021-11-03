@@ -1,5 +1,5 @@
 <?php
-/**
+/** $$$
  * Content wrappers
  *
  * This template can be overridden by copying it to yourtheme/woocommerce/global/wrapper-start.php.
@@ -44,6 +44,6 @@ switch ( $template ) {
 		echo '<div id="primary" class="content-area twentysixteen"><main id="main" class="site-main" role="main">';
 		break;
 	default:
-		echo '<div id="primary" class="content-area"><main id="main" class="site-main" role="main">';
+		echo '<div id="primary" class="container mx-auto my-8"><main id="main" class="site-main" role="main">';
 		break;
 }
