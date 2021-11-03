@@ -62,6 +62,28 @@ function tailpress_asset( $path ) {
 	return add_query_arg( 'time', time(),  get_stylesheet_directory_uri() . '/' . $path );
 }
 
+/*
+* WooCommerce Support
+* https://docs.woocommerce.com/document/woocommerce-theme-developer-handbook/
+*/
+function exotica_add_woocommerce_support() {
+    add_theme_support( 'woocommerce', array(
+        'thumbnail_image_width' => 150,
+        'single_image_width'    => 300,
+
+        'product_grid'          => array(
+            'default_rows'    => 3,
+            'min_rows'        => 2,
+            'max_rows'        => 8,
+            'default_columns' => 4,
+            'min_columns'     => 2,
+            'max_columns'     => 5,
+        ),
+    ) );
+}
+
+add_action( 'after_setup_theme', 'exotica_add_woocommerce_support' );
+
 /**
  * Adds option 'li_class' to 'wp_nav_menu'.
  *
@@ -114,7 +136,6 @@ add_filter( 'nav_menu_submenu_css_class', 'tailpress_nav_menu_add_submenu_class'
  */
 add_filter('use_block_editor_for_post', '__return_false', 10);
 
-
 /**
  * Remove WooCommerce Blocks
  */
@@ -123,3 +144,8 @@ function deregister_woocommerce_block_styles() {
 	wp_dequeue_style( 'wc-blocks-style' );
 }
 add_action( 'enqueue_block_assets', 'deregister_woocommerce_block_styles' );
+
+/**
+ * Remove WooCommerce default styles
+ */
+add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
